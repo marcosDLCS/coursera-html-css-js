@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guess the Color Game</title>
+    <script>
+        const COLORS = ["blue", "cyan", "gold", "gray", "green", "magenta", "orange", "red", "white", "yellow"];
+
+        const TARGET = "The target color is: ";
+        const THINKING = "I'm thinking one of these colors:\n\n";
+        const WHAT_COLOR = "\n\nWhat color i am thinking of?\n";
+        const SUCCESS = "Congratulations! You have guessed the color!\n";
+
+        function do_game() {
+            var target_index = Math.floor(Math.random() * COLORS.length);
+            var target = COLORS[target_index];
+            alert(TARGET + target + "\n\n");
+            var guess_input = "";
+
+            do {
+                guess_input = prompt(THINKING + COLORS + WHAT_COLOR);
+            } while (guess_input.toLowerCase() != target);
+
+            alert(SUCCESS);
+        }
+    </script>
+</head>
+<body onload="do_game()">
+</body>
+</html>

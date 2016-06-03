@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guess the Color Game</title>
+    <script>
+        const COLORS = ["blue", "cyan", "gold", "gray", "green", "magenta", "orange", "red", "white", "yellow"];
+
+        const TARGET = "The target color is: ";
+        const THINKING = "I'm thinking one of these colors:\n\n";
+        const WHAT_COLOR = "\n\nWhat color i am thinking of?\n";
+
+        const HINT = "Hint: ";
+        const HINT_LOWER = "your color is alphabetically lower than mine\n\n";
+        const HINT_HIGHER = "your color is alphabetically higher than mine\n\n";
+
+        const ERROR = "Sorry, your guess is not correct!\n\n";
+        const TRY_AGAIN = "Please try again.\n";
+        const NOT_RECOGNIZE = "Sorry, I don't recognize your color.\n\n"
+
+        const SUCCESS = "Congratulations! You have guessed the color!\n\n";
+        const COLOR_IN_BACKGROUND = "You can see the color in the background.\n";
+
+        function do_game(){
+            var target_index = Math.floor(Math.random() * COLORS.length);
+            var target = COLORS[target_index];
+            alert(TARGET + target + "\n\n");
+            var guess_input = "";
+            var counter = 0;
+
+            do {
+                guess_input = prompt(THINKING + COLORS + WHAT_COLOR);
+                counter++;
+            } while (!check_guess(target, guess_input));
+
+            var count_message = "It took you " + counter + " guesses to finish the game!\n\n";
+            document.body.style.backgroundColor = target;
+            alert(SUCCESS + count_message + COLOR_IN_BACKGROUND);
+        }
+
+        function check_guess(target, guess_input){
+            if( COLORS.indexOf(guess_input.toLowerCase()) == -1 ){
+                alert(NOT_RECOGNIZE + TRY_AGAIN);
+                return false;
+            }
+            if(guess_input.toLowerCase() > target){
+                alert(ERROR + HINT + HINT_HIGHER + TRY_AGAIN);
+                return false;
+            }
+            if(guess_input.toLowerCase() < target){
+                alert(ERROR + HINT + HINT_LOWER + TRY_AGAIN);
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body onload="do_game()">
+
+</body>
+</html>
